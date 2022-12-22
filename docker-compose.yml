@@ -1,0 +1,29 @@
+version: '3.4'
+
+networks:
+  postgresql:
+    external: true
+
+services:
+  nodepostgresql:
+    image: baginda/node:1.0
+    container_name: nodepostgtresql
+    environment:
+      - TZ=Asia/Jakarta
+      - POSTGRES_HOST=192.168.122.169
+      - POSTGRES_USER=cbr
+      - POSTGRES_PASSWORD=cbr250rr
+      - POSTGRES_DATABASENAME=tet
+      - POSTGRES_PORT=5432
+      - PORT=3004
+#      - URL_MNL=https://192.168.1.24:3002
+#      - URL_MNL=https://api.transaksiku.id
+    volumes:
+      - ./logs:/app/logs
+    ports:
+      - 3004:3004
+    networks:
+      - postgresql
+#    extra_hosts:
+#      - "api.transaksiku.id:192.168.1.24"
+    restart: on-failure
